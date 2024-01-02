@@ -39,6 +39,7 @@ import kafdrop.service.KafkaMonitor;
 import kafdrop.service.MessageInspector;
 import kafdrop.service.TopicNotFoundException;
 import kafdrop.util.AvroMessageDeserializer;
+import kafdrop.util.BoltSpotCoreMessageDeserializer;
 import kafdrop.util.DefaultMessageDeserializer;
 import kafdrop.util.Deserializers;
 import kafdrop.util.KeyFormat;
@@ -360,6 +361,8 @@ public final class MessageController {
       deserializer = new ProtobufSchemaRegistryMessageDeserializer(topicName, schemaRegistryUrl, schemaRegistryAuth);
     } else if (format == MessageFormat.MSGPACK) {
       deserializer = new MsgPackMessageDeserializer();
+    } else if (format == MessageFormat.SPOT) {
+      deserializer = new BoltSpotCoreMessageDeserializer();
     } else {
       deserializer = new DefaultMessageDeserializer();
     }
